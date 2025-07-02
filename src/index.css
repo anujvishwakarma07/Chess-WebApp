@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out;
+}
+
+/* Professional Chess Board Styling */
+.react-chessboard {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+}
+
+/* Enhanced piece styling with proper drag behavior */
+.react-chessboard .piece {
+  cursor: grab !important;
+  transition: all 0.15s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  z-index: 10;
+  position: relative;
+}
+
+.react-chessboard .piece:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  z-index: 20;
+}
+
+.react-chessboard .piece:active,
+.react-chessboard .piece.dragging {
+  cursor: grabbing !important;
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  z-index: 1000;
+}
+
+/* Improved drag layer styling */
+.react-chessboard .drag-layer {
+  pointer-events: none;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.react-chessboard .drag-layer .piece {
+  cursor: grabbing !important;
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+
+/* Square styling improvements */
+.react-chessboard .square {
+  position: relative;
+  transition: all 0.1s ease;
+}
+
+/* Enhanced square highlights */
+.react-chessboard .square.highlight {
+  box-shadow: inset 0 0 0 3px #000000 !important;
+}
+
+.react-chessboard .square.check {
+  box-shadow: inset 0 0 0 3px #ef4444 !important;
+  animation: pulse 1s infinite;
+}
+
+.react-chessboard .square.selected {
+  box-shadow: inset 0 0 0 3px #3b82f6 !important;
+}
+
+.react-chessboard .square.possible-move {
+  position: relative;
+}
+
+.react-chessboard .square.possible-move::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20%;
+  height: 20%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Notation styling */
+.react-chessboard .notation {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Piece movement animations */
+.react-chessboard .piece.moving {
+  transition: all 0.2s ease-out;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Typography improvements */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+}
+
+/* Responsive design helpers */
+@media (max-width: 640px) {
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .react-chessboard {
+    border-width: 1px;
+  }
+  
+  .react-chessboard .piece {
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+  }
+}
+
+/* Enhanced drag and drop behavior */
+.react-chessboard .square.drag-over {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.react-chessboard .square.drop-target {
+  box-shadow: inset 0 0 0 2px #22c55e !important;
+}
+
+/* Piece selection states */
+.react-chessboard .piece.selectable {
+  cursor: pointer;
+}
+
+.react-chessboard .piece.selected {
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+}
+
+/* Game state indicators */
+.react-chessboard.game-over .piece {
+  cursor: default !important;
+  opacity: 0.8;
+}
+
+.react-chessboard.ai-thinking .piece {
+  cursor: wait !important;
+}
+
+/* Minimalist button styles */
+button {
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* Clean focus states */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Prevent text selection during gameplay */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Pulse animation for active elements */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
